@@ -6,6 +6,7 @@ import { TarefaService, Tarefa } from '../shared';
     templateUrl: './listar-tarefa.component.html',
     styleUrls: ['./listar-tarefa.component.css']
 })
+
 export class ListarTarefaComponent implements OnInit {
 
     tarefas: Tarefa[];
@@ -24,7 +25,14 @@ export class ListarTarefaComponent implements OnInit {
         $event.preventDefault();
         if (confirm('Deseja remover a tarefa "'+ tarefa.nome +'"?')) {
             this.tarefaService.remover(tarefa.id);
-            this.tarefas = this.tarefaService.listarTodos();
+            this.tarefas = this.listarTodos();
+        }
+    }
+
+    alterarStatus(tarefa: Tarefa): void {
+        if (confirm('Deseja alterar o status da tarefa "'+ tarefa.nome +'"?')) {
+            this.tarefaService.alterarStatus(tarefa.id);
+            this.tarefas = this.listarTodos();
         }
     }
 }
